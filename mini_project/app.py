@@ -55,7 +55,7 @@ def load_model():
 def main():
     st.title('Sentiment analysis')
     with st.spinner('Loading model...'):
-        model = load_model()
+        # model = load_model()
 
     # model = keras.models.load_model('models/model_32_GRU_32')
     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
