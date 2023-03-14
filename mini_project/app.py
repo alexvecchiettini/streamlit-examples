@@ -18,10 +18,10 @@ def main():
         result = analyzer.polarity_scores(input_text)
 
         # string_result = 'negative' if result < .5 else 'positive'
-        st.write(f"This text is d=evaluated as follows:")
-        st.write(f"Positive - {result.pos}")
-        st.write(f"Neutral  - {result.neu}")
-        st.write(f"Negative - {result.neg}")
+        st.write(f"This text is evaluated as follows:")
+        st.write(f"Positive - {result['pos']}")
+        st.write(f"Neutral  - {result['neu']}")
+        st.write(f"Negative - {result['neg']}")
 
 
 if __name__ == '__main__':
