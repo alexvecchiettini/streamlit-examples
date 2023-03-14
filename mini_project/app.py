@@ -4,7 +4,7 @@ import re
 import pickle
 from keras_preprocessing.sequence import pad_sequences
 
-def preprocess_text(sen):
+def preprocess_text(sentence):
     # Remove punctuations and numbers
     sentence = re.sub('[^a-zA-Z]', ' ', sentence)
 
