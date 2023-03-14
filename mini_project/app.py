@@ -31,6 +31,7 @@ def main():
     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
     text = preprocess_text(input_text)
     tokenizer = Tokenizer(num_words=5000)
+    tokenizer.fit_on_texts(text)
     text = tokenizer.text_to_sequences(text)
     text = pad_sequences(text, padding='post', maxlen=100)
     click = st.button('Run on text')
