@@ -1,7 +1,7 @@
 import streamlit as st
 from keras import models
 import re
-import pickle
+from keras.preprocessing.text import Tokenizer
 from keras_preprocessing.sequence import pad_sequences
 
 def preprocess_text(sentence):
@@ -27,11 +27,10 @@ def main():
     st.title('Sentiment analysis')
     with st.spinner('Loading model...'):
         model = load_model()
-        with open('models/tokenizer.pickle', 'rb') as handle:
-            tokenizer = pickle.load(handle)
 
     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
     text = preprocess_text(input_text)
+    tokenizer = Tokenizer(num_words=5000)
     text = tokenizer.text_to_sequences(text)
     text = pad_sequences(text, padding='post', maxlen=100)
     click = st.button('Run on text')
