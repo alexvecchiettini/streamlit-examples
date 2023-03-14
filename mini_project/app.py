@@ -1,5 +1,5 @@
-import streamlit as st
-import keras
+# import streamlit as st
+# from keras import models
 
 
 # def load_image():
@@ -57,14 +57,14 @@ import keras
 #     with st.spinner('Loading model...'):
 #         model = load_model()
 
-#     # model = keras.models.load_model('models/model_32_GRU_32')
+#     model = keras.models.load_model('models/model_32_GRU_32')
 #     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
     
 #     click = st.button('Run on text')
 
 #     if click:
 #         st.write('Calculating results...')
-#         # result = model.predict(input_text)
+#         result = model.predict(input_text)
 #         result = .5
 #         string_result = 'negative' if result < .5 else 'positive'
 #         st.write(f"This text is {string_result}")
