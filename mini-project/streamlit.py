@@ -46,10 +46,16 @@ import keras
 #     top5_prob, top5_catid = torch.topk(probabilities, 5)
 #     for i in range(top5_prob.size(0)):
 #         st.write(categories[top5_catid[i]], top5_prob[i].item())
-
+@st.cache(allow_output_mutation=True)
+def load_model():
+    model = keras.models.load_model('models/model_32_GRU_32')
+    return model
 
 def main():
     st.title('Sentiment analysis')
+    with st.spinner('Loading model...'):
+        model = load_model()
+
     model = keras.models.load_model('models/model_32_GRU_32')
     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
     
