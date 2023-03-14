@@ -1,5 +1,3 @@
 # latest versions as of 2023-03-14
 streamlit==1.19.0
-keras==2.10
-tensorflow==2.10.1
 vaderSentiment
