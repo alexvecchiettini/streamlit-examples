@@ -3,4 +3,3 @@ streamlit==1.19.0
 keras
 tensorflow
 pickle
-keras_preprocessing
