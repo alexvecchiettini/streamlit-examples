@@ -54,7 +54,7 @@ def load_model():
 
 def main():
     st.title('Sentiment analysis')
-    with st.spinner('Loading model...'):
+    # with st.spinner('Loading model...'):
         # model = load_model()
 
     # model = keras.models.load_model('models/model_32_GRU_32')
