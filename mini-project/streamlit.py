@@ -1,4 +1,3 @@
-from PIL import Image
 import streamlit as st
 import keras
 
@@ -50,13 +49,13 @@ import keras
 
 
 def main():
-    st.title('Image Classification')
-    model = keras.models.load_model('models/model_64_GRU_32')
+    st.title('Sentiment analysis')
+    model = keras.models.load_model('models/model_32_GRU_32')
     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
     
-    result = st.button('Run on text')
+    click = st.button('Run on text')
 
-    if result:
+    if click:
         st.write('Calculating results...')
         result = model.predict(input_text)
         string_result = 'negative' if result < .5 else 'positive'
