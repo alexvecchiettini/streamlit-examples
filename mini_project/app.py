@@ -1,49 +1,78 @@
 import streamlit as st
 from keras import models
 import re
+import tensorflow as tf
 from keras.preprocessing.text import Tokenizer
 from keras_preprocessing.sequence import pad_sequences
-
-def preprocess_text(sentence):
-    # Remove punctuations and numbers
-    sentence = re.sub('[^a-zA-Z]', ' ', sentence)
-
-    # Single character removal
-    sentence = re.sub(r"\s+[a-zA-Z]\s+", ' ', sentence)
-
-    # Removing multiple spaces
-    sentence = re.sub(r'\s+', ' ', sentence)
-
-    return sentence
-
-
-
-@st.cache(allow_output_mutation=True)
-def load_model():
-    model = models.load_model('models/model_32_GRU_32')
-    return model
+# Import sentiment analyzer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def main():
+    
     st.title('Sentiment analysis')
-    with st.spinner('Loading model...'):
-        model = load_model()
 
     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
-    text = preprocess_text(input_text)
-    tokenizer = Tokenizer(num_words=5000)
-    tokenizer.fit_on_texts(text)
-    text = tokenizer.text_to_sequences(text)
-    text = pad_sequences(text, padding='post', maxlen=100)
+    # text = preprocess_text(input_text)
+    # tokenizer = Tokenizer(num_words=5000)
+    # tokenizer.fit_on_texts(text)
+    # text = tokenizer.text_to_sequences(text)
+    # text = pad_sequences(text, padding='post', maxlen=100)
     click = st.button('Run on text')
 
     if click:
         st.write('Calculating results...')
-        result = model.predict(text)
-        result = .5
-        string_result = 'negative' if result < .5 else 'positive'
-        st.write(f"This text is {string_result}")
+        # Initialize model
+        analyzer = SentimentIntensityAnalyzer()
+        # Analyze the text with polarityScores
+        result = analyzer.polarity_scores(input_text)
 
-        # predict(model, categories, image)
+        # string_result = 'negative' if result < .5 else 'positive'
+        st.write(f"This text is {result}")
+    
+
+
+
+
+# def preprocess_text(sentence):
+#     # Remove punctuations and numbers
+#     sentence = re.sub('[^a-zA-Z]', ' ', sentence)
+
+#     # Single character removal
+#     sentence = re.sub(r"\s+[a-zA-Z]\s+", ' ', sentence)
+
+#     # Removing multiple spaces
+#     sentence = re.sub(r'\s+', ' ', sentence)
+
+#     return sentence
+
+
+
+# @st.cache(allow_output_mutation=True)
+# def load_model():
+#     model = models.load_model('models/model_32_GRU_32')
+#     return model
+
+# def main():
+#     st.title('Sentiment analysis')
+#     with st.spinner('Loading model...'):
+#         model = load_model()
+
+#     input_text = st.text_input("Evaluate this", disabled=False, placeholder="This model ain't that good")
+#     text = preprocess_text(input_text)
+#     tokenizer = Tokenizer(num_words=5000)
+#     tokenizer.fit_on_texts(text)
+#     text = tokenizer.text_to_sequences(text)
+#     text = pad_sequences(text, padding='post', maxlen=100)
+#     click = st.button('Run on text')
+
+#     if click:
+#         st.write('Calculating results...')
+#         result = model.predict(text)
+#         result = .5
+#         string_result = 'negative' if result < .5 else 'positive'
+#         st.write(f"This text is {string_result}")
+
+#         # predict(model, categories, image)
 
 
 if __name__ == '__main__':
